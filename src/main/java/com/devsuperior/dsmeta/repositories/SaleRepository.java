@@ -13,7 +13,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 
     @Query(value = "SELECT obj FROM Sale obj JOIN FETCH obj.seller " +
     "WHERE UPPER(obj.seller.name) LIKE UPPER(CONCAT('%', :name, '%')) " +
-    "AND obj.date BETWEEN :minDate AND :maxDate", 
+    "AND obj.date BETWEEN :minDate AND :maxDate",
     countQuery = "SELECT count(obj) FROM Sale obj JOIN obj.seller " +
     "WHERE UPPER(obj.seller.name) LIKE UPPER(CONCAT('%', :name, '%')) " +
     "AND obj.date BETWEEN :minDate AND :maxDate")

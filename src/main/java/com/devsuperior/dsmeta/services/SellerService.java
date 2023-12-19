@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import com.devsuperior.dsmeta.dto.SummaryMinDTO;
+import com.devsuperior.dsmeta.projections.SummaryMinProjection;
 import com.devsuperior.dsmeta.repositories.SellerRepository;
 
 @Service
@@ -20,7 +19,7 @@ public class SellerService {
 	private SellerRepository repository;
 
 	@Transactional(readOnly=true)
-	public List<SummaryMinDTO> searchSummary(String name, String minDate, String maxDate) {
+	public List<SummaryMinProjection> searchSummary(String name, String minDate, String maxDate) {
 
 		LocalDate localDateMin = minDate.equals("") ?
 		LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()).minusYears(1L) :
@@ -30,7 +29,7 @@ public class SellerService {
 		LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault()) :
 		LocalDate.parse(maxDate);
 
-		List<SummaryMinDTO> result = repository.searchSummary(name, localDateMin, localDateMax);
+		List<SummaryMinProjection> result = repository.searchSummary(name, localDateMin, localDateMax);
 		return result;
 	}
 }

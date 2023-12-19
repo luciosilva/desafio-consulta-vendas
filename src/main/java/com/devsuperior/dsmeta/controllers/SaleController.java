@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.dsmeta.dto.ReportMinDTO;
 import com.devsuperior.dsmeta.dto.SaleMinDTO;
-import com.devsuperior.dsmeta.dto.SummaryMinDTO;
+import com.devsuperior.dsmeta.projections.SummaryMinProjection;
 import com.devsuperior.dsmeta.services.SaleService;
 import com.devsuperior.dsmeta.services.SellerService;
 
@@ -45,11 +45,11 @@ public class SaleController {
 	}
 
 	@GetMapping(value = "/summary")
-	public ResponseEntity<List<SummaryMinDTO>> getSummary(
+	public ResponseEntity<List<SummaryMinProjection>> getSummary(
 		@RequestParam(name = "name", defaultValue = "") String name,
 		@RequestParam(name = "minDate", defaultValue = "") String minDate,
 		@RequestParam(name = "maxDate", defaultValue = "") String maxDate) {
-		List<SummaryMinDTO> listDto = sellerService.searchSummary(name, minDate, maxDate);
+		List<SummaryMinProjection> listDto = sellerService.searchSummary(name, minDate, maxDate);
 		return ResponseEntity.ok(listDto);
 	}
 }

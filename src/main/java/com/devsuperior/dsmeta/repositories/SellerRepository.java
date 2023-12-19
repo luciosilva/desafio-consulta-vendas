@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.devsuperior.dsmeta.dto.SummaryMinDTO;
 import com.devsuperior.dsmeta.entities.Seller;
+import com.devsuperior.dsmeta.projections.SummaryMinProjection;
 
 public interface SellerRepository extends JpaRepository<Seller, Long> {
 
@@ -19,5 +19,5 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
     "WHERE TB_SALES.DATE BETWEEN :minDate AND :maxDate " +
     "AND UPPER(TB_SELLER.NAME) LIKE UPPER(CONCAT('%', :name, '%')) " +
     "GROUP BY TB_SELLER.NAME", nativeQuery = true)
-    List<SummaryMinDTO> searchSummary(String name, LocalDate minDate, LocalDate maxDate);
+    List<SummaryMinProjection> searchSummary(String name, LocalDate minDate, LocalDate maxDate);
 }
